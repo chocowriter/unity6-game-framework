@@ -1,25 +1,18 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using EndlessRunner;
 
 namespace Framework
 {
-    public enum SceneName
-    {
-        SignIn = 0,
-        MainMenu,
-        SinglePlay,
-        MultiPlay,
-        Training,
-        Settings
-    }
+    
 
     /// <summary> 씬을 불러들이고 관리한다. </summary>
     public class SceneController : Singleton<SceneController>
     {
         /// <summary> 현재 실행 중인 씬의 이름 </summary>
-        [SerializeField] private SceneName m_CurrentSceneName = SceneName.SignIn;
+        [SerializeField] private Define.SceneName m_CurrentSceneName = Define.SceneName.SignIn;
 
-        public SceneName CurrentScene
+        public Define.SceneName CurrentScene
         {
             get { return m_CurrentSceneName; }
             set { m_CurrentSceneName = value; }
@@ -34,7 +27,7 @@ namespace Framework
 
         /// <summary> 지정된 이름을 가진 씬을 불러들인다. </summary>
         /// <param name="name"></param>
-        public void LoadScene(SceneName name)
+        public void LoadScene(Define.SceneName name)
         {
             m_CurrentSceneName = name;
             SceneManager.LoadScene(m_CurrentSceneName.ToString(), LoadSceneMode.Single);
@@ -43,7 +36,7 @@ namespace Framework
         /// <summary> 지정된 이름을 가진 씬을 불러들인다. </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public AsyncOperation LoadSceneAsyn(SceneName name)
+        public AsyncOperation LoadSceneAsyn(Define.SceneName name)
         {
             m_CurrentSceneName = name;
             return SceneManager.LoadSceneAsync(m_CurrentSceneName.ToString());
@@ -51,7 +44,7 @@ namespace Framework
 
         /// <summary> 불러온 씬이 이미 있는데 추가적으로 더 불러들이는 씬이 있다. </summary>
         /// <param name="name"></param>
-        public void LoadSceneAddictive(SceneName name)
+        public void LoadSceneAddictive(Define.SceneName name)
         {
             SceneManager.LoadScene(name.ToString(), LoadSceneMode.Additive);
         }
